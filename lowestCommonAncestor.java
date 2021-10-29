@@ -1,53 +1,24 @@
-// Recursive Java program to print lca of two nodes
+public class DAG {
+    int size=0;
+    int edges=0;
 
-// A binary tree node
-class Node
-{
-    int data;
-    Node left, right;
-
-    Node(int item)
-    {
-        data = item;
-        left = right = null;
-    }
-}
-
-public class lowestCommonAncestor
-{
-    Node root;
-
-    /* Function to find LCA of n1 and n2. The function assumes that both
-       n1 and n2 are present in BST */
-    Integer lca(Node node, int n1, int n2)
-    {
-    if(Contains(root, n1) && Contains(root, n2)) {
-    while (root != null) {
-        // If both n1 and n2 are smaller than root, then LCA lies in left
-        if (node.data > n1 && node.data > n2)
-            return lca(node.left, n1, n2);
-
-            // If both n1 and n2 are greater than root, then LCA lies in right
-        else if (node.data < n1 && node.data < n2)
-            return lca(node.right, n1, n2);
-        else {
-            break;
+    public DAG(int size){
+        if(size<0){
+            throw new IllegalArgumentException("Graph size cannot have a negative value.");
         }
-    }
-    return node.data;
-}
-else {
-    System.out.println("Value does not exist in the tree.");
-    return null;
-}
+        else{
+            this.size=size;
+            this.edges=0;
+        }
+
     }
 
-    public static boolean Contains(Node root, int value)
-    {
-        if (root == null) return false;
-        if (root.data == value) return true;
-        if (root.data > value) return Contains(root.left, value);
-        return Contains(root.right, value);
+public int getSize(){
+        return size;
+}
+
+public int getEdges(){
+        return edges;
     }
 
 }
