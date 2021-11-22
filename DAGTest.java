@@ -68,6 +68,32 @@ class DAGTest {
         });
     }
 
+    @Test
+    void testContainsEdge() {
+        DAG graph = new DAG(3);
+        graph.addEdge(1, 2);
+        assertEquals("contains Edge passed for legal parameters.", true, graph.containsEdge(1, 2));
+        assertEquals("throw false because edge is not in graph", false, graph.containsEdge(0, 1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.containsEdge(4, 1);
+        });
+          Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.containsEdge(0, 4);
+        });
+         Assertions.assertThrows(IllegalArgumentException.class, () -> {
+         graph.containsEdge(4, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.containsEdge(-1, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.containsEdge(4, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.containsEdge(-1, -1);
+        });
+    }
+
     //tests for addEdge
     @Test
     void testAddEdge() {
@@ -83,6 +109,24 @@ class DAGTest {
         //tests that value higher than size cannot be entered for addEdge
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             graph.addEdge(1, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.addEdge(4, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.addEdge(0, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.addEdge(4, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.addEdge(-1, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.addEdge(4, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.addEdge(-1, -1);
         });
     }
 
@@ -104,6 +148,25 @@ class DAGTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             graph.removeEdge(1, 9);
         });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.removeEdge(4, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.removeEdge(0, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.removeEdge(4, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.removeEdge(-1, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.removeEdge(4, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            graph.removeEdge(-1, -1);
+        });
+
     }
 
 
@@ -118,6 +181,67 @@ class DAGTest {
         //removing the cyclic edge for cyclic graph to make it acyclic
         cyclic.removeEdge(3, 1);
         assertEquals("", false, cyclic.Cyclic());
+
+
+    }
+    @Test
+    void testDFS() {
+        createCyclicGraph();
+        createAcyclicGraph();
+        ArrayList<Integer> ancestors=new ArrayList<Integer>();
+        ArrayList<Integer> result =new ArrayList<Integer>();
+        ancestors.add(6);
+        ancestors.add(1);
+        ancestors.add(0);
+        ancestors.add(2);
+        ancestors.add(3);
+        assertEquals("", ancestors, acyclic.DFS(acyclic, 6));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            acyclic.DFS(acyclic, 10);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            acyclic.DFS(acyclic, -1);
+        });
+
+    }
+
+    @Test
+    void testDFSutil() {
+        createCyclicGraph();
+        createAcyclicGraph();
+        ArrayList<Integer> ancestors=new ArrayList<Integer>();
+        ancestors.add(6);
+        ancestors.add(1);
+        ancestors.add(0);
+        ancestors.add(2);
+        ancestors.add(3);
+        int[] visited = new int[acyclic.getSize()];
+        int depth = 0;
+        ArrayList<Integer> ancestor = new ArrayList<Integer>();
+        assertEquals("", ancestors, acyclic.DFSutil(acyclic, 6, visited, depth, ancestor));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            acyclic.DFSutil(acyclic, 10, visited, depth, ancestor);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            acyclic.DFSutil(acyclic, -1, visited, depth, ancestor);
+        });
+
+    }
+
+
+    @Test
+    void testoutDegree() {
+        createAcyclicGraph();
+        assertEquals("add Edge passed for legal parameters.", 2, acyclic.outdegree(0));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.outdegree( 10);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.outdegree( -1);
+        });
     }
 
     //testing the LCA method to find the lowest common ancestor
@@ -147,6 +271,25 @@ class DAGTest {
         //testing cyclic graph will throw exception
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             cyclic.LCA(cyclic, 2, 3);
+        });
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.LCA(cyclic, 4, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.LCA(cyclic, 0, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.LCA(cyclic, 4, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.LCA(cyclic, -1, 4);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.LCA(cyclic, 4, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cyclic.LCA(cyclic, -1, -1);
         });
     }
 

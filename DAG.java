@@ -38,7 +38,11 @@ public class DAG {
 
     //returns true if there is edge from a to b, else false
     public boolean containsEdge(int a, int b) {
+        if (((a >= 0) && a < getSize()) && ((b >= 0) && b < getSize())) {
         return adjacent[a][b] == 1;
+        } else {
+            throw new IllegalArgumentException("Argument cannot have parameters bigger than the graph..");
+        }
     }
 
     //adds edge to the graph
@@ -69,7 +73,11 @@ public class DAG {
 
     //returns number of edges going out from a
     public int outdegree(int a) {
+        if (((a >= 0) && a < getSize())) {
         return out[a];
+        } else {
+            throw new IllegalArgumentException("Graph size cannot have a negative value, or bigger value than its size.");
+        }
     }
 
     //helping method for Cyclic();
@@ -179,6 +187,7 @@ public class DAG {
 
     //returns all the ancestors of a node by doing Depth first Search
     public ArrayList<Integer> DFS(DAG graph, int a) {
+        if (((a >= 0) && a < getSize()) ) {
         int[] visited = new int[size];
         int depth = 0;
 
@@ -186,11 +195,15 @@ public class DAG {
         ArrayList<Integer> ancestor = new ArrayList<Integer>();
         //recursive helper method
         anc = DFSutil(graph, a, visited, depth, ancestor);
-        return anc;
+        return anc;}
+        else {
+                throw new IllegalArgumentException("Graph size cannot have a negative value, or bigger value than its size.");
+            }
     }
 
     //returns the ancestors of a and their depth
     public ArrayList<Integer> DFSutil(DAG graph, int a, int[] visited, int depth, ArrayList<Integer> anc) {
+        if (((a >= 0) && a < getSize()) ) {
         visited[a] = 1;
         anc.add(a);
 
@@ -202,4 +215,8 @@ public class DAG {
         }
         return anc;
     }
+        else {
+            throw new IllegalArgumentException("Graph size cannot have a negative value, or bigger value than its size.");
+        }
+}
 }
