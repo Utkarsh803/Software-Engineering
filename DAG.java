@@ -201,7 +201,7 @@ public class DAG {
             }
     }
 
-    //returns the ancestors of a and their depth
+    //returns the ancestors of a
     public ArrayList<Integer> DFSutil(DAG graph, int a, int[] visited, int depth, ArrayList<Integer> anc) {
         if (((a >= 0) && a < getSize()) ) {
         visited[a] = 1;
