@@ -5,7 +5,7 @@ import pymongo
 
 
 # using an access token--create own token to use
-g = Github(" ")
+g = Github("")
 
 #getting basic user data
 usr = g.get_user()
