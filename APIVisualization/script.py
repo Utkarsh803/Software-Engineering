@@ -57,8 +57,7 @@ def get_data(top_repos,topic):
 
             db.githubuser.insert_many([dct])
 
-    
-
+                
 
 TOPICS=["machine-learning","data-science","Android-Studio","c++","java","javascript","python","react","Raspberry-pi","quantumn-computing"]
 
