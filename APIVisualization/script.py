@@ -8,24 +8,34 @@ import pandas as pd
 import datetime
 
 # using an access token--create own token to use
-g = Github("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")
 
-#getting basic user data
-usr = g.get_user()
 
-#print("Getting data for repo:" + repo_name);
+try:
+    token = input("Please enter the token or 'No' if using a username => ")
+    g = Github(token)
+    usr = g.get_user()
+    test_token_repos=usr.get_repos()
+    for repo in test_token_repos:
+        break
+    print("Token worked.Getting data..")
+except:
+    print("Token is invalid.You have limited access.")
+    username = input("Enter your Github Username =>")
+    g = Github()
+    usr = g.get_user(username)
 
-#get repo by name
-#repo = g.get_repo(repo_name)
 
 def get_data(top_repos,topic):
+    print("Fetching repositories and their data for the topic: " + topic)
     for repo in top_repos:
+        print("Fetching data for repository :  " + repo.name)
         for x in range(1,13):
+            #setting times to specify to get commits for an interval
             s=datetime.datetime(2020,x,1)
             if x==2:
                 u=datetime.datetime(2020,x,29)
             elif x!=2:
-                u=datetime.datetime(2020,x,29)
+                u=datetime.datetime(2020,x,30)
             PRs=repo.get_pulls(state='all')
             all_issues = repo.get_issues(state='open',sort='created',direction='asc')
             dct ={'Topic':topic,
@@ -48,7 +58,7 @@ def get_data(top_repos,topic):
                         if v is None:
                             del dct[k]
 
-            print("Cleaned Dictionary:  " + json.dumps(dct))
+            #print("Fetched data for repository :  " + json.dumps(dct['name']))
 
             conn = "mongodb://localhost:27017"
             client = pymongo.MongoClient(conn)
@@ -60,18 +70,28 @@ def get_data(top_repos,topic):
                 
 
 TOPICS=["machine-learning","data-science","Android-Studio","c++","java","javascript","python","react","Raspberry-pi","quantumn-computing"]
+#list to keep track of all repos added
+top_repo_full = []
 
 for top in TOPICS:
+    #search repos tagged with topics
     all_repo = g.search_repositories(f'topic:{top}')
-    #print(all_repo.totalCount)
-
+    #get only first six repos from those repositories
     top_repo = []
     for i, repo in enumerate(all_repo):
-        top_repo.append(repo)
-        if i == 20:
+        #check to not include duplicate repos again
+        if repo not in top_repo_full:
+            top_repo.append(repo)
+            top_repo_full.append(repo)
+        else:
+            i=i-1
+        if i == 5:
             break
 
     get_data(top_repo,top)
+
+print("Fetching data through Github API. This might take some time.")
+print("Data fetched successfully.")
 
 
 

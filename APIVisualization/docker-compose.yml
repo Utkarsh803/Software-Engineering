@@ -7,6 +7,7 @@ services:
     - PUID=1000
     - PGID=1000
    volumes :
+   #put own address here
     - /C:/Users/Utkarsh/Documents/Database/data/db 
    ports:
     - 27017:27017
