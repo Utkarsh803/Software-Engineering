@@ -19,7 +19,7 @@ Important Note:-\
 'python cleardbuser.py'\
 3.)Please set volumes value and python version in file docker-compose.yml\
 4.)User is asked for a token to fetch data from github. It is preffered that a token is used. However on writing a wrong toke,
-a username is asked and used for fetching data.\
+a username is asked and used for fetching data.
 
 
 This visualisation works in three Steps:\
@@ -75,3 +75,9 @@ Use command './userVis.sh' to execute this entire process.
 
 Troubleshoot:\
 docker-compose up command may carry out unnecessary outputs. In this case you can comment out ./run-db.sh in the main command files if docker is already running. 
+
+Explanation of Heatmaps of the the correlation between factors in the most popular repositories:\
+We can see that popular repos tend to have a strong positive correlation between\
+a) Commits and Issues\
+b) Commits and pull requests\
+c) Issues and Contributors Count
