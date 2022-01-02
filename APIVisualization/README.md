@@ -44,7 +44,7 @@ b.)The monthly commits are plotted on a line chart.
 
 c.)A heapmap of the the correlation between factors in the least popular repositories.
 
-![](images/Plotly7.JPG)
+![](images/plotly7.JPG)
 
 d.)A heapmap of the the correlation between factors in the most popular repositories.
 
