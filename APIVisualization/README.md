@@ -7,6 +7,7 @@ Use command './userVis.sh' to visulaise repos for a user.
 
 Dependencies:-\
 Pymongo\
+PyGitHub\
 Plotly\
 docker\
 pandas\
