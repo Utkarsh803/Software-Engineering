@@ -36,19 +36,19 @@ This data is saved to a csv file under the name 'repoData.csv'.
 Then the data is visualised in form of three graphs.
 a.)The top five repositories with most stars.
 
-![](images/Plotly4.jpg)
+![](images/Plotly4.JPG)
 
 b.)The monthly commits are plotted on a line chart.
 
-![](images/Plotly5.jpg)
+![](images/Plotly5.JPG)
 
 c.)A heapmap of the the correlation between factors in the least popular repositories.
 
-![](images/Plotly7.jpg)
+![](images/Plotly7.JPG)
 
 d.)A heapmap of the the correlation between factors in the most popular repositories.
 
-![](images/Plotly8.jpg)
+![](images/Plotly8.JPG)
 
 
 Use command './repoVis.sh' to execute this entire process.
@@ -61,11 +61,11 @@ This data is saved to a csv files under the name 'userInfo.csv' and 'commit_hist
 For this data we plot:
 a.)A pie chart of the languages used in % according to number of repositories using them.
 
-![](images/Plotly1.jpg)
+![](images/Plotly1.JPG)
 
 b.)A bar chart of the stars and repositories. 
 
-![](images/Plotly2.jpg)
+![](images/Plotly2.JPG)
 
 c.)Finally, a commit frequency chart that shows the commit trend of user in past year.
 
