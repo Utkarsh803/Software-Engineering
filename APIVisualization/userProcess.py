@@ -32,7 +32,7 @@ with open('userInfo.csv', 'w') as f:
     f.write('User_Name,Name,Language,Forks,Stars,Commits\n')
     dct = db.githubuser_single.find()
     for user in dct:
-        if user.get('language') is not None:
+        if user.get('language') is not None and user.get('User_Name') is not None and user.get('name') is not None:
             f.write(user['User_Name']+','+user['name']+','+user['language']+','+str(user['Forks'])+','+str(user['Stars'])+','+str(user['Commits'])+'\n')
             userName=user['User_Name']
 
