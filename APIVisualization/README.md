@@ -22,7 +22,7 @@ Important Note:-\
 a username is asked and used for fetching data.\
 
 
-This visualisation works in three Steps:
+This visualisation works in three Steps:\
 1.Gathering data from github and saving it into a pymongo database using docker.\
 2.Processing that data and saving it into csv files.\
 3.Fetching data from csv files and visualising them using Plotly and pandas.
