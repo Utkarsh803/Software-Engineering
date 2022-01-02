@@ -9,18 +9,17 @@ import datetime
 
 # using an access token--create own token to use
 
-
+username = input("Enter your Github Username =>")
 try:
     token = input("Please enter the token or 'No' if using a username => ")
     g = Github(token)
-    usr = g.get_user()
+    usr = g.get_user(username)
     test_token_repos=usr.get_repos()
     for repo in test_token_repos:
         break
     print("Token worked.Getting data..")
 except:
     print("Token is invalid.You have limited access.")
-    username = input("Enter your Github Username =>")
     g = Github()
     usr = g.get_user(username)
 
